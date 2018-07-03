@@ -46,5 +46,24 @@ def update_player():
     query_string = "SELECT * FROM Players WHERE id = '{id}'".format(id=id)
     return jsonify(db.execute(query_string).fetchall())
 
+@app.route('/api/puzzle', methods=['GET'])
+def get_puzzle():
+    return
+
+@app.route('/api/puzzle/update', methods=['PUT'])
+def update_puzzle():
+    return
+
+@app.route('/api/push_notificiations', methods=['GET'])
+def get_notification():
+    # Client sends player id - server responds with notfication for player
+    # Server has a bool that the client pings
+    # Client puts bool once notification is received
+    return
+
+@app.route('/api/push_notifications/update', methods=['PUT'])
+def update_notification():
+    return
+
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
