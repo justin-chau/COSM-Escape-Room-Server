@@ -13,23 +13,18 @@ def convert_dict(cursor, row):
 
 @app.route('/api/players', methods=['GET'])
 def get_player():
-    results = []
     db_connection = sqlite3.connect('escape_database.db', isolation_level=None)
     db_connection.row_factory = convert_dict
     db = db_connection.cursor()
-    players = db.execute('SELECT * FROM Players').fetchall()
 
     if 'id' in request.args:
         id = int(request.args['id'])
-
-        for player in players:
-            if player['id'] == id:
-                results.append(player)
-
-        return jsonify(results)
+        query_string = "SELECT * FROM Players WHERE id = '{id}'".format(id=id)
+        return jsonify(db.execute(query_string).fetchall())
 
     else:
-        return jsonify(players)
+        query_string = "SELECT * FROM Players"
+        return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/players/update', methods=['PUT'])
 def update_player():
@@ -41,9 +36,15 @@ def update_player():
         abort(400)
     if not request.form:
         abort(400)
-    
+
     id = int(request.args['id'])
-    return jsonify(db.execute('SELECT FROM Players WHERE id=2'))
+
+    for key in request.form:
+        query_string = "UPDATE Players SET '{key}' = '{value}' WHERE id = '{id}'".format(key=key, value=request.form.get(key), id=id)
+        db.execute(query_string)
+
+    query_string = "SELECT * FROM Players WHERE id = '{id}'".format(id=id)
+    return jsonify(db.execute(query_string).fetchall())
 
 if __name__ == "__main__":
     app.run()
