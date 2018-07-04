@@ -17,9 +17,9 @@ def get_player():
     db_connection.row_factory = convert_dict
     db = db_connection.cursor()
 
-    if 'id' in request.args:
-        id = int(request.args['id'])
-        query_string = "SELECT * FROM Players WHERE id = '{id}'".format(id=id)
+    if 'player_id' in request.args:
+        id = int(request.args['player_id'])
+        query_string = "SELECT * FROM Players WHERE player_id = '{id}'".format(id=id)
         return jsonify(db.execute(query_string).fetchall())
 
     else:
@@ -48,11 +48,11 @@ def update_player():
 
 @app.route('/api/puzzles', methods=['GET'])
 def get_puzzle():
-    return "Not Implemented"
+    return "Not Implemented WIP"
 
 @app.route('/api/puzzles/update', methods=['PUT'])
 def update_puzzle():
-    return "Not Implemented"
+    return "Not Implemented WIP"
 
 @app.route('/api/push_notifications', methods=['GET'])
 def get_notification():
