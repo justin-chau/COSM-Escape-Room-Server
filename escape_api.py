@@ -32,23 +32,34 @@ def update_player():
     db_connection.row_factory = convert_dict
     db = db_connection.cursor()
     
-    if 'id' not in request.args:
+    if 'player_id' not in request.args:
         abort(400)
     if not request.form:
         abort(400)
 
-    id = int(request.args['id'])
+    id = int(request.args['player_id'])
 
     for key in request.form:
-        query_string = "UPDATE Players SET '{key}' = '{value}' WHERE id = '{id}'".format(key=key, value=request.form.get(key), id=id)
+        query_string = "UPDATE Players SET '{key}' = '{value}' WHERE player_id = '{id}'".format(key=key, value=request.form.get(key), id=id)
         db.execute(query_string)
 
-    query_string = "SELECT * FROM Players WHERE id = '{id}'".format(id=id)
+    query_string = "SELECT * FROM Players WHERE player_id = '{id}'".format(id=id)
     return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/puzzles', methods=['GET'])
 def get_puzzle():
-    return "Not Implemented WIP"
+    db_connection = sqlite3.connect('escape_database.db', isolation_level=None)
+    db_connection.row_factory = convert_dict
+    db = db_connection.cursor()
+
+    if 'puzzle_id' not in request.args:
+        abort(400)
+
+    id = int(request.args['puzzle_id'])
+
+    query_string = "SELECT * FROM puzzle_{id}".format(id=id)
+    print(query_string)
+    return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/puzzles/update', methods=['PUT'])
 def update_puzzle():
