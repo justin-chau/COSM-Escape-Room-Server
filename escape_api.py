@@ -46,24 +46,48 @@ def update_player():
     query_string = "SELECT * FROM Players WHERE id = '{id}'".format(id=id)
     return jsonify(db.execute(query_string).fetchall())
 
-@app.route('/api/puzzle', methods=['GET'])
+@app.route('/api/puzzles', methods=['GET'])
 def get_puzzle():
-    return
+    return "Not Implemented"
 
-@app.route('/api/puzzle/update', methods=['PUT'])
+@app.route('/api/puzzles/update', methods=['PUT'])
 def update_puzzle():
-    return
+    return "Not Implemented"
 
-@app.route('/api/push_notificiations', methods=['GET'])
+@app.route('/api/push_notifications', methods=['GET'])
 def get_notification():
-    # Client sends player id - server responds with notfication for player
-    # Server has a bool that the client pings
-    # Client puts bool once notification is received
-    return
+    db_connection = sqlite3.connect('escape_database.db', isolation_level=None)
+    db_connection.row_factory = convert_dict
+    db = db_connection.cursor()
+
+    if 'player_id' in request.args:
+        id = int(request.args['player_id'])
+        query_string = "SELECT * FROM Notifications WHERE player_id = '{id}'".format(id=id)
+        return jsonify(db.execute(query_string).fetchall())
+
+    else:
+        query_string = "SELECT * FROM Notifications"
+        return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/push_notifications/update', methods=['PUT'])
 def update_notification():
-    return
+    db_connection = sqlite3.connect('escape_database.db', isolation_level=None)
+    db_connection.row_factory = convert_dict
+    db = db_connection.cursor()
+    
+    if 'player_id' not in request.args:
+        abort(400)
+    if not request.form:
+        abort(400)
+
+    id = int(request.args['player_id'])
+
+    for key in request.form:
+        query_string = "UPDATE Notifications SET '{key}' = '{value}' WHERE player_id = '{id}'".format(key=key, value=request.form.get(key), id=id)
+        db.execute(query_string)
+
+    query_string = "SELECT * FROM Notifications WHERE player_id = '{id}'".format(id=id)
+    return jsonify(db.execute(query_string).fetchall())
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
