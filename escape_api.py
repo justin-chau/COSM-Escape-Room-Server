@@ -57,13 +57,29 @@ def get_puzzle():
 
     id = int(request.args['puzzle_id'])
 
-    query_string = "SELECT * FROM puzzle_{id}".format(id=id)
+    query_string = "SELECT * FROM Puzzle_{id}".format(id=id)
     print(query_string)
     return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/puzzles/update', methods=['PUT'])
 def update_puzzle():
-    return "Not Implemented WIP"
+    db_connection = sqlite3.connect('escape_database.db', isolation_level=None)
+    db_connection.row_factory = convert_dict
+    db = db_connection.cursor()
+
+    if 'puzzle_id' not in request.args:
+        abort(400)
+    if not request.form:
+        abort(400)
+
+    id = int(request.args['puzzle_id'])
+
+    for key in request.form:
+        query_string = "UPDATE Puzzle_{id} SET '{key}' = '{value}'".format(id=id, key=key, value=request.form.get(key))
+        db.execute(query_string)
+
+    query_string = "SELECT * FROM Players_{id}".format(id=id)
+    return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/push_notifications', methods=['GET'])
 def get_notification():
