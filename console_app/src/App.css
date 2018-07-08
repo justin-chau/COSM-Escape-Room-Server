@@ -1,28 +1,116 @@
-.App {
-  text-align: center;
+.helios_logo {
+    padding: 30px;
+    width: 220px;
+    height: auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.helios_log {
+    padding-top: 15vh;
+    padding-left: 60px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.helios_log p {
+    margin: 0px;
+    color: #8A8181;
+    opacity: 0.6;
+    font-size: 14px;
+    font-weight: 400;
 }
 
-.App-title {
-  font-size: 1.5em;
+.helios_log form {
+    padding-top: 30px;
 }
 
-.App-intro {
-  font-size: large;
+.helios_log form input[type="text"] {
+    font-family: "Muli";
+    font-size: 14px;
+    font-weight: 300;
+    margin-right: 20px;
+    padding: 5px;
+    width: 400px;
+    background-color: transparent;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom-width: 5px;
+    border-color: #8A8181;
+    color: #8A8181;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.helios_log form input:focus {
+    outline-width: 0px;
+}
+
+.helios_log form input::-webkit-input-placeholder {
+    font-family: "Muli";
+    color: #8A8181;
+    opacity: 0.6;
+}
+
+.helios_log form button {
+    font-family: "Muli";
+    font-weight: 800;
+    height: 35px;
+    width: 120px;
+    background-color: #8A8181;
+    border: 0;
+    color: #F6F4EF;
+    margin-top: 10px;
+}
+
+.helios_badge {
+    position: fixed;
+    bottom: 10vh;
+    right: 0;  
+}
+
+.helios_badge img {
+    height: 55px;
+    padding-right: 10px;
+}
+
+.text_badge {
+    padding: 10px;
+    padding-left: 25px;
+    background-color: #8A8181;
+    width: 350px;
+    height: 35px;
+    float: right;
+}
+
+.helios_badge p {
+    font-family: "Muli";
+    margin: 0;
+    color: #F6F4EF;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.helios_badge p.title {
+    font-weight: 800;
+}
+
+.helios_colors {
+    padding-top: 10px;
+}
+
+.helios_red {
+    width: 20px;
+    height: 5px;
+    background-color: #DD6262;
+    float: left;
+}
+
+.helios_blue {
+    width: 20px;
+    height: 5px;
+    background-color: #779BE2;
+    float: left;
+}
+
+.helios_green {
+    width: 20px;
+    height: 5px;
+    background-color: #A0D770;
+    float: left;
 }
