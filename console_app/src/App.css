@@ -114,3 +114,11 @@
     background-color: #A0D770;
     float: left;
 }
+
+.helios_log p.log_warning {
+    color: #DD6262;
+}
+
+.helios_log p.log_success {
+    color: #A0D770;
+}

@@ -1,9 +1,12 @@
 import flask
 from flask import request, jsonify, abort
+from flask_cors import CORS
 import sqlite3
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+
+CORS(app)
 
 def convert_dict(cursor, row):
     d = {}
@@ -78,7 +81,24 @@ def update_puzzle():
         query_string = "UPDATE Puzzle_{id} SET '{key}' = '{value}'".format(id=id, key=key, value=request.form.get(key))
         db.execute(query_string)
 
-    query_string = "SELECT * FROM Players_{id}".format(id=id)
+        if (id == 1 and key == 'current_code'):
+            if (request.form.get(key) == '832'):
+                query_string = "UPDATE Puzzle_1 SET 'is_correct' = '1'"
+                db.execute(query_string)
+            else:
+                query_string = "UPDATE Puzzle_1 SET 'is_correct' = '0'"
+                db.execute(query_string)
+
+        if (id == 2 and key == 'current_coordinates'):
+            if (request.form.get(key) == '532968752'):
+                query_string = "UPDATE Puzzle_2 SET 'is_correct' = '1'"
+                db.execute(query_string)
+            else:
+                query_string = "UPDATE Puzzle_2 SET 'is_correct' = '0'"
+                db.execute(query_string)
+    
+
+    query_string = "SELECT * FROM Puzzle_{id}".format(id=id)
     return jsonify(db.execute(query_string).fetchall())
 
 @app.route('/api/push_notifications', methods=['GET'])
