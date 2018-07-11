@@ -1,0 +1,60 @@
+.PlayerForm {
+    margin: 20px;
+    margin-right: 100px;
+    float: left;
+    color: #707070;
+    font-size: 12px;
+}
+
+.PlayerForm input[type="text"] {
+    background-color : transparent;
+    border-color : white;
+    border-style: solid;
+    width: 300px;
+    height: 28px;
+    color: white;
+    border-width: 1px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.PlayerForm form input:focus {
+    outline-width: 0px;
+}
+
+.PlayerForm form input[type="text"]::-webkit-input-placeholder {
+    color: #707070;
+}
+
+.PlayerForm form input[type="text"]::-moz-placeholder {
+    color: #707070;
+}
+
+.PlayerForm .container {
+    overflow: hidden;
+}
+
+.PlayerForm button {
+    display: block;
+    margin: 0 0 0 -20px;
+    background-color: white;
+    border: 0;
+    width: 125px;
+    height: 30px;
+    color: #292323;
+    text-align: left;
+    transform-origin: bottom left;
+    -ms-transform: skew(-30deg, 0deg);
+    -webkit-transform: skew(-30deg, 0deg);
+    transform: skew(-30deg, 0deg);
+    overflow: hidden;
+}
+
+.PlayerForm .text {
+    font-weight: 500;
+    margin-left: 10px;
+    -ms-transform: skew(30deg, 0deg);
+    -webkit-transform: skew(30deg, 0deg);
+    transform: skew(30deg, 0deg);
+}

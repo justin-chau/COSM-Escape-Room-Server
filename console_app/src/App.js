@@ -23,6 +23,17 @@ class App extends React.Component {
       const code_verified = response.body[0].is_correct;
       console.log(current_code);
       this.setState({
+        current_code : current_code
+      });
+      console.log(this.state);
+    });
+    Request.put(url).set('Content-Type', 'application/x-www-form-urlencoded')
+    .send({ "current_code" : code_input })
+    .then((response) => {
+      const current_code = response.body[0].current_code;
+      const code_verified = response.body[0].is_correct;
+      console.log(current_code);
+      this.setState({
         current_code : current_code,
         code_verified : code_verified
       });
@@ -34,6 +45,17 @@ class App extends React.Component {
     e.preventDefault();
     var coord_input = e.target.elements.coordinate_field.value;
     var url = "http://localhost:5000/api/puzzles/update?puzzle_id=2";
+    Request.put(url).set('Content-Type', 'application/x-www-form-urlencoded')
+    .send({ "current_coordinates" : coord_input })
+    .then((response) => {
+      const current_coordinates = response.body[0].current_coordinates;
+      const coordinates_verified = response.body[0].is_correct;
+      console.log(current_coordinates);
+      this.setState({
+        current_coordinates : current_coordinates
+      });
+      console.log(this.state);
+    });
     Request.put(url).set('Content-Type', 'application/x-www-form-urlencoded')
     .send({ "current_coordinates" : coord_input })
     .then((response) => {
