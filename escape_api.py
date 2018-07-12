@@ -173,6 +173,13 @@ if __name__ == "__main__":
         puzzle_3_data = db.execute(query_string).fetchall()
         query_string = "SELECT * FROM Puzzle_4"
         puzzle_4_data = db.execute(query_string).fetchall()
+        query_string = "SELECT * FROM Players WHERE player_id = '0'"
+        player_1_data = db.execute(query_string).fetchall()
+        query_string = "SELECT * FROM Players WHERE player_id = '1'"
+        player_2_data = db.execute(query_string).fetchall()
+        query_string = "SELECT * FROM Players WHERE player_id = '2'"
+        player_3_data = db.execute(query_string).fetchall()
+
         puzzle_1_complete = puzzle_1_data[0]['is_finished']
         puzzle_2_complete = puzzle_2_data[0]['is_finished']
         puzzle_3_complete = puzzle_3_data[0]['is_finished']
@@ -254,8 +261,23 @@ if __name__ == "__main__":
 
         if (puzzle_3_complete == False):
             #LOGIC FOR SPY GETTING CORRUPTED KEY
-            #LOGIC FOR GETTING CHEST KEY
-            if (puzzle_3_data[0]['pc_1_inserted'] and puzzle_3_data[0]['pc_2_inserted']):
+            # LOGIC FOR GETTING CHEST KEY
+            if (player_1_data[0]['current_rfid'] == '23817421843'):
+                update_player_value(0, 'current_rfid', 0)
+                update_player_value(0, 'chest_key', 1)
+                send_notification(0, 'notification', "Chest Key Loaded")
+
+            if (player_2_data[0]['current_rfid'] == '23817421843'):
+                update_player_value(1, 'current_rfid', 0)
+                update_player_value(1, 'chest_key', 1)
+                send_notification(1, 'notification', "Chest Key Loaded")
+
+            if (player_3_data[0]['current_rfid'] == '23817421843'):
+                update_player_value(2, 'current_rfid', 0)
+                update_player_value(2, 'chest_key', 1)
+                send_notification(2, 'notification', "Chest Key Loaded")
+
+            if (puzzle_3_data[0]['pc_1_inserted'] == 0 and puzzle_3_data[0]['pc_2_inserted']):
                 print ("[COSMOS] **PLAYERS HAVE ENTERED THE CORRECT COORDINATES FOR PUZZLE 2")
                 #FLASH LEDS AND PLAY NOISE
                 update_puzzle_value(3, 'pc_complete', 1)

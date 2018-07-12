@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PlayerStats from './components/PlayerStats';
+import GameStats from './components/GameStats';
+import Logo from './assets/Asset 1Meta.png';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <img src={Logo} alt="Logo" className="logo"/>
+        <iframe
+          src="http://player.twitch.tv/?channel=justinchau&muted=false&allowfullscreen=false"
+          autoPlay="true"
+          frameborder="0"
+          scrolling="no"
+          allowfullscreen="false">
+        </iframe>
+        <PlayerStats playerNum = '1'/>
+        <PlayerStats playerNum = '2'/>
+        <PlayerStats playerNum = '3'/>
+        <GameStats />
       </div>
     );
   }
